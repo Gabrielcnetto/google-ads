@@ -34,8 +34,6 @@ func GetAcessToken() (token string, err error) {
 	if err := json.Unmarshal(responseBody, &decodedData); err != nil {
 		return "", err
 	}
-	fmt.Println(gads.R_T)
-
 	accessToken, ok := decodedData["access_token"].(string)
 	if !ok || accessToken == "" {
 		return "", fmt.Errorf("access_token não encontrado ou inválido")
