@@ -19,7 +19,8 @@ var mu sync.Mutex
 var wg sync.WaitGroup
 
 var AccountList = []map[string]string{
-	{"Nome_da_conta": "0000000000"}, //nome da conta, da sua preferencia | id da conta é o id da conta google ads, sem os traços(-)
+	{"Nome da conta": "000-000-0000"}, //nome da conta, da sua preferencia | id da conta é o id da conta google ads
+
 }
 
 func FetchGoogle(c *gin.Context) {
@@ -30,7 +31,7 @@ func FetchGoogle(c *gin.Context) {
 	3) prevenção de request limit do google em cima do IP
 	*/
 	ctx := context.Background()
-	accountFromCache, status, err := rediscache.GetAccountsOnCache(ctx)
+	accountFromCache, status, err := rediscache.GetAccountsOnCache(ctx, len(AccountList))
 	if !status || err != nil {
 		//Não encontramos a busca no cache,
 
