@@ -8,11 +8,12 @@ import (
 	"net/http"
 	gads "netto/controllers/gads/credentials"
 	"strconv"
+	"strings"
 )
 
 func FetchAccountDatas(accessToken string, customerID string, month int, day int, year int) (body map[string]interface{}, err error) {
 
-	url := fmt.Sprintf("https://googleads.googleapis.com/v22/customers/%v/googleAds:search", customerID)
+	url := fmt.Sprintf("https://googleads.googleapis.com/v22/customers/%v/googleAds:search", strings.Replace(customerID, "-", "", -1))
 	query := fmt.Sprintf("SELECT campaign.name, metrics.all_conversions, metrics.cost_micros, metrics.impressions, metrics.clicks FROM campaign WHERE campaign.status IN ('ENABLED') AND segments.date BETWEEN '%d-%02d-01' AND '%d-%02d-%02d'", year, month, year, month, day)
 	requestBody := []byte(fmt.Sprintf(`
 	{

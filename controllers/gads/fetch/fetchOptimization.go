@@ -7,10 +7,11 @@ import (
 	"io"
 	"net/http"
 	gads "netto/controllers/gads/credentials"
+	"strings"
 )
 
 func FetchOptimization(accessToken string, customerID string) (body map[string]interface{}, err error) {
-	url := fmt.Sprintf("https://googleads.googleapis.com/v22/customers/%v/googleAds:search", customerID)
+	url := fmt.Sprintf("https://googleads.googleapis.com/v22/customers/%v/googleAds:search", strings.Replace(customerID, "-", "", -1))
 	requestBody := []byte(`
 	{
 		"query": "SELECT customer.id,customer.descriptive_name,customer.optimization_score FROM customer"

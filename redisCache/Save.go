@@ -13,5 +13,5 @@ func SaveAccountsOnCache(data []models.GoogleAdwAccount, ctx context.Context) er
 	if err != nil {
 		return err
 	}
-	return redisconn.Set(ctx, "adw_accounts", fmtData, time.Duration(time.Second*30)).Err()
+	return redisconn.Set(ctx, "adw_accounts", fmtData, time.Duration(time.Hour*12)).Err()
 }
